@@ -1,9 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col>
+        <div class="app-logo">
+          <ion-img src="assets/imgs/crime-alert.png"></ion-img>
+        </div>
+        <div class="social-login">
+          <ion-img (click)="doLogin()" src="assets/imgs/google-sign-in.png"></ion-img>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

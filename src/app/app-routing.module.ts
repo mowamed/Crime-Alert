@@ -1,24 +1,27 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'report-crime',
-    loadChildren: () => import('./report-crime/report-crime.module').then( m => m.ReportCrimePageModule)
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canActivate: [AngularFireAuthGuard]
   },
+  {
+    path: 'report-crime',
+    loadChildren: () => import('./report-crime/report-crime.module').then( m => m.ReportCrimePageModule),
+    canActivate: [AngularFireAuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
