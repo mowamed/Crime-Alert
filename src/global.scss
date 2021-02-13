@@ -24,3 +24,7 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+// hide google logo and copyright to reflect the prototype design
+.gm-style-cc { display:none; }
+img[src^="https://maps.gstatic.com/mapfiles/api-3/images/google4_hdpi.png"]{display:none !important}
