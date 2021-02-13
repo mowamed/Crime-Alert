@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "crime-alert-eea56": {
+      "hosting": {
+        "app": [
+          "crime-alert-eea56"
+        ]
+      }
+    }
+  }
+}
