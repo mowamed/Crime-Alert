@@ -7,14 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<div #map id="map"></div>
+<div class="map-container">
+  <app-custom-map [markers]="[]"></app-custom-map>
+</div>
 </ion-content>
 <ion-fab vertical="bottom" horizontal="end" >
   <ion-fab-button color="light">
     <ion-icon name="locate"></ion-icon>
   </ion-fab-button>
   <br>
-  <ion-fab-button>
+  <ion-fab-button routerLink="/home/report-crime">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

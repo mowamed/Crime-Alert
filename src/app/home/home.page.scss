@@ -1,12 +1,10 @@
 ion-content {
-  //--offset-top: 0;
   position: absolute;
   top: 0;
 }
-#map {
+.map-container {
   height: 100%;
 }
-
 
 ion-header {
   --background: transparent;
@@ -15,11 +13,22 @@ ion-header {
 ion-toolbar {
   --min-height: 80px;
   --background: grey;
-  --opacity: .7;
+  --opacity: 0.7;
   --color: white;
 }
 
 ion-title {
   font-weight: bold;
   font-size: 30px;
+}
+
+// styling for small screen
+@media only screen and (min-width: 0px) and (max-width: 599.9px) {
+  ion-toolbar {
+    --min-height: 60px;
+  }
+
+  ion-title {
+    font-size: 25px;
+  }
 }

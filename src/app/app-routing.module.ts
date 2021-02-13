@@ -13,11 +13,6 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard]
   },
   {
-    path: 'report-crime',
-    loadChildren: () => import('./report-crime/report-crime.module').then( m => m.ReportCrimePageModule),
-    canActivate: [AngularFireAuthGuard]
-  },
-  {
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full'
