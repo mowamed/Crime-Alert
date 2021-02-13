@@ -1,0 +1,7 @@
+{
+  "name": "crimeAlert",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
