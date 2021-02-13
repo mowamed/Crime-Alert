@@ -1,9 +1,30 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>reportCrime</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" icon="close"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>New Crime</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear">save</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="add-form">
+    <ion-searchbar
+      inputmode="search"
+      type="search"
+      animated="true"
+      autocomplete="street-address"
+      color="primary"
+      showCancelButton="never"
+    ></ion-searchbar>
+    <ion-button slot="start"  color="primary" fill="clear">Or Use my Current Location</ion-button>
+  </div>
+  <div class="map-container">
+    <app-custom-map [markers]="[]"></app-custom-map>
+  </div>
 </ion-content>
