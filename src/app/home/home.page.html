@@ -8,11 +8,11 @@
 
 <ion-content [fullscreen]="true">
 <div class="map-container">
-  <app-custom-map [markers]="[]"></app-custom-map>
+  <app-custom-map></app-custom-map>
 </div>
 </ion-content>
 <ion-fab vertical="bottom" horizontal="end" >
-  <ion-fab-button color="light">
+  <ion-fab-button (click)="setCurrentLocation()" color="light">
     <ion-icon name="locate"></ion-icon>
   </ion-fab-button>
   <br>

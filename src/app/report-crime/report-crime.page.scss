@@ -10,14 +10,22 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 30%;
+  top: 25%;
 
   ion-searchbar {
     --border-radius: 20px;
   }
 
+  ion-list {
+    border-radius: 20px;
+  }
+
   ion-button {
     float: left;
     text-decoration: underline solid black;
+  }
+
+  .current-location-button {
+    display: block;
   }
 }

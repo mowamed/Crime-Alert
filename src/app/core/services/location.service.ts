@@ -12,6 +12,9 @@ import {Observable} from 'rxjs';
 export class LocationService {
   constructor(private afFire: AngularFirestore) {}
 
+  /**
+   * get current location using capacior
+   */
   getCurrentPosition() {
     return Geolocation.getCurrentPosition();
   }

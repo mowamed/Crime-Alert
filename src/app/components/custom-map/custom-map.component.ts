@@ -1,36 +1,48 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-declare var google;
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { MapsService } from '../../core/services/maps.service';
+import { Subscription } from 'rxjs';
+import { LocationService } from '../../core/services/location.service';
 
 @Component({
   selector: 'app-custom-map',
   templateUrl: './custom-map.component.html',
   styleUrls: ['./custom-map.component.scss'],
 })
-export class CustomMapComponent implements OnInit {
+export class CustomMapComponent implements OnInit, OnDestroy {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
-  @Input() markers: any[] = [];
+  subscriptions$: Subscription = new Subscription();
 
-  constructor() {}
+  constructor(
+    private mapsService: MapsService,
+    private locationService: LocationService
+  ) {}
 
   ngOnInit() {
     // wait after component initialisation before to load the map
     setTimeout(() => {
       this.loadMap();
-    }, 200);
+      this.loadMarkers();
+    }, 20);
+  }
+
+  loadMarkers() {
+    this.subscriptions$.add(
+      this.locationService.getCrimeLocations().subscribe((markers) => {
+        this.mapsService.addMarkersToMap(markers);
+      })
+    );
   }
 
   // Initialize map
   loadMap() {
-    const latLng = new google.maps.LatLng(5.6488615, -0.1374539);
+    this.locationService.getCurrentPosition().then((position) => {
+      this.map = this.mapsService.loadMap(position, this.mapElement);
+    });
+  }
 
-    const mapOptions = {
-      center: latLng,
-      zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      disableDefaultUI: true,
-    };
-
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+  // unsubscribe from observables
+  ngOnDestroy() {
+    this.subscriptions$.unsubscribe();
   }
 }

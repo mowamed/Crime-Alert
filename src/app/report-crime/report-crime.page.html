@@ -7,25 +7,51 @@
     <ion-title>New Crime</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button fill="clear">save</ion-button>
+      <ion-button (click)="saveCrime()" fill="clear">save</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="add-form">
-    <ion-searchbar
-      inputmode="search"
-      placeholder="Search for location on map"
-      type="search"
-      animated="true"
-      autocomplete="street-address"
-      color="primary"
-      showCancelButton="never"
-    ></ion-searchbar>
-    <ion-button slot="start"  color="primary" fill="clear">Or Use my Current Location</ion-button>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-searchbar
+            (ionChange)="onSearch()"
+            [(ngModel)]="searchQuery"
+            inputmode="search"
+            placeholder="Search for location on map"
+            type="search"
+            animated="true"
+            autocomplete="street-address"
+            color="primary"
+            showCancelButton="never"
+          ></ion-searchbar>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <div *ngIf="!crimeLocation" class="current-location-button">
+            <ion-button (click)="useCurrentLocation()" slot="start"  color="primary" fill="clear">Or Use my Current Location</ion-button>
+          </div>
+
+          <div *ngIf="crimeLocation" class="prediction-list">
+            <ion-list>
+              <ion-item>
+                <ion-icon color="primary" name="location" slot="start"></ion-icon>
+                <ion-label color="primary">{{crimeLocation.name}}</ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
   </div>
   <div class="map-container">
-    <app-custom-map [markers]="[]"></app-custom-map>
+    <app-custom-map></app-custom-map>
   </div>
 </ion-content>

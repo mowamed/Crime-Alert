@@ -1,20 +1,35 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {AngularFireAuth} from '@angular/fire/auth';
+import { BehaviorSubject } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
+import { User } from '../models/user.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
 
-  user = null;
   authenticationState = new BehaviorSubject(false);
+  currentUser: User | null;
 
   constructor(private afAuth: AngularFireAuth) {
-    this.afAuth.authState.subscribe(user => {
-      this.authenticationState.next(!!user);
-    });
+    this.afAuth.authState
+      .pipe(
+        map((firebaseUser) =>
+          firebaseUser
+            ? ({
+                id: firebaseUser.uid,
+                name: firebaseUser.displayName,
+                email: firebaseUser.email,
+              } as User)
+            : null
+        )
+      )
+      .subscribe((user) => {
+        this.currentUser = user;
+        this.authenticationState.next(!!user);
+      });
   }
 
   isAuthenticated() {

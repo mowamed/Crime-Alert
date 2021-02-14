@@ -16,8 +16,8 @@ export class MapsService {
 
   /**
    * initialise a new google maps object
-   * @param currentPosition
-   * @param mapsRef
+   * @param currentPosition current position of User
+   * @param mapsRef a reference of the map in template
    */
   loadMap(currentPosition: GeolocationPosition, mapsRef: ElementRef) {
     // initialize map with user current location or use Accra
@@ -40,6 +40,7 @@ export class MapsService {
 
   /**
    * find the nearest place based on search term using Google Maps Autocomplete Services API
+   * https://developers.google.com/maps/documentation/javascript/places-autocomplete
    * @param searchTerm the term to search for
    */
   getAddressFromSearchTerm(searchTerm: string): Promise<CrimeLocation> {
@@ -65,6 +66,7 @@ export class MapsService {
 
   /**
    * find the nearest place based on gps coordinates using Google Maps Geocoder API
+   * https://developers.google.com/maps/documentation/geocoding/overview
    * @param currentLocation gps coordinates
    */
   getAddressFromCurrentPosition(
@@ -94,6 +96,7 @@ export class MapsService {
 
   /**
    * get additional information about a place using Google maps Places Services
+   * https://developers.google.com/maps/documentation/javascript/reference/places-service
    * @param placeId the id of the place
    */
   getPlaceDetails(placeId: string): Promise<CrimeLocation> {
